@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>運動建議</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    body:not(.homepage) {
+      background-image: url('/static/fitness.png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      width: 320px;
+      text-align: left;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      font-size: 1.2rem;
+    }
+
+    .card ul {
+      padding-left: 1.2rem;
+    }
+
+    .card li {
+      margin-bottom: 0.6rem;
+    }
+
+    .sub-section {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .sub-boxes {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .sub-box {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 18px;
+      padding: 20px 25px;
+      width: 300px;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      border: 2px solid #4caf50;
+    }
+
+    .sub-box h3 {
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .sub-box ul li {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .link-tip {
+      background-color: #f3f3f3;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+
+    .link-tip:hover {
+      background-color: #e0e0e0;
+    }
+
+    .popup {
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -30%);
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      z-index: 999;
+    }
+
+    .popup.hidden {
+      display: none;
+    }
+
+    .popup-content {
+      color: #333;
+    }
+
+    .close-btn {
+      float: right;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .home-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.9rem 1.8rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #222;
+      background-color: #FFD700;
+      border: none;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .home-btn:hover {
+      background-color: #FFC300;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="overlay">
+    <h1>💪 運動建議</h1>
+    <div class="card-container">
+      <div class="card">
+        <h2>🔥 減脂建議</h2>
+        <ul>
+          <li><strong>適合對象：</strong>想變瘦、改善體態、減少體脂。</li>
+          <li><strong>有氧運動：</strong>快走、跑步、腳踏車、游泳，每週 3～5 次，每次 30～60 分鐘。</li>
+          <li><strong>HIIT 間歇訓練：</strong>短時間高強度爆發，有效燃脂。</li>
+          <li><strong>飲食重點：</strong>熱量赤字（TDEE -300～500）、高蛋白。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>🧘 維持體態</h2>
+        <ul>
+          <li><strong>適合對象：</strong>只想維持健康與目前體態的人。</li>
+          <li><strong>混合訓練：</strong>每週安排有氧+重訓。</li>
+          <li><strong>飲食重點：</strong>熱量 ≒ TDEE，均衡飲食最重要。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>🏋️ 增肌建議</h2>
+        <ul>
+          <li><strong>適合對象：</strong>想增強線條、力量、變壯。</li>
+          <li><strong>重訓核心：</strong>深蹲、推舉、肩推等，每週 3～5 次。</li>
+          <li><strong>飲食重點：</strong>熱量盈餘，每公斤體重 1.6～2.2g 蛋白質。</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="sub-section">
+      <h2>📚 運動類型介紹</h2>
+      <div class="sub-boxes">
+        <div class="sub-box">
+          <h3>🏃 有氧運動</h3>
+          <ul>
+            <li>跑步</li>
+            <li>腳踏車（飛輪）</li>
+            <li>游泳</li>
+          </ul>
+        </div>
+
+        <div class="sub-box">
+          <h3>🏋️‍♂️ 重訓</h3>
+          <ul>
+            <li class="link-tip" data-desc="臥推：訓練胸大肌與三頭肌。<br>啞鈴飛鳥：打開胸部肌群，提高彈性。">胸部：臥推、啞鈴飛鳥</li>
+            <li class="link-tip" data-desc="推舉：肩膀前束發力。<br>側平舉：訓練中束與後束，雕塑肩形。">肩部：推舉、側平舉</li>
+            <li class="link-tip" data-desc="引體向上：訓練背闊肌與手臂。<br>划船：橫向拉力型訓練。">背部：引體向上、划船</li>
+            <li class="link-tip" data-desc="深蹲：下半身爆發力與穩定性。<br>硬舉：臀腿後側肌群。<br>弓箭步：單腳穩定能力與核心。">臀腿：深蹲、硬舉、弓箭步</li>
+          </ul>
+        </div>
+
+        <div class="sub-box">
+          <h3>⏱️ HIIT 間歇運動</h3>
+          <ul>
+            <li class="link-tip" data-desc="跑步間歇：快跑30秒＋慢跑1分鐘，重複4～6輪。">跑步間歇</li>
+            <li class="link-tip" data-desc="跳繩：高強度1分鐘＋低強度30秒交替。">跳繩</li>
+            <li class="link-tip" data-desc="循環訓練：徒手動作連續切換如深蹲＋伏地挺身＋登山者。">循環訓練</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 小框框顯示內容 -->
+    <div id="popup" class="popup hidden">
+      <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <p id="popup-text"></p>
+      </div>
+    </div>
+
+    <a href="/" class="home-btn">🏠 回到首頁</a>
+  </div>
+
+  <script>
+    const tips = document.querySelectorAll('.link-tip');
+    const popup = document.getElementById('popup');
+    const popupText = document.getElementById('popup-text');
+
+    tips.forEach(tip => {
+      tip.addEventListener('click', () => {
+        popupText.innerHTML = tip.dataset.desc.replaceAll("\\n", "<br>");
+        popup.classList.remove('hidden');
+      });
+    });
+
+    function closePopup() {
+      popup.classList.add('hidden');
+    }
+  </script>
+  <script>
+    document.querySelectorAll('.link-tip').forEach(el => {
+    const popup = document.createElement('div');
+    popup.classList.add('hover-popup');
+    popup.innerHTML = el.dataset.desc.replace(/\n/g, "<br>");
+    document.body.appendChild(popup);
+
+    el.addEventListener('mouseenter', (e) => {
+        popup.style.top = (e.pageY + 10) + 'px';
+        popup.style.left = (e.pageX + 10) + 'px';
+        popup.style.opacity = 1;
+    });
+
+    el.addEventListener('mousemove', (e) => {
+        popup.style.top = (e.pageY + 10) + 'px';
+        popup.style.left = (e.pageX + 10) + 'px';
+    });
+
+    el.addEventListener('mouseleave', () => {
+        popup.style.opacity = 0;
+    });
+    });
+    </script>
+</body>
+</html>

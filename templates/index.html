@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>TDEE 計算</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+</head>
+<body class="homepage">
+  <div class="container">
+    <h1>🧮 TDEE 計算</h1>
+
+    <div class="intro">
+      <h2>什麼是 TDEE？什麼是 BMR？什麼是 BMI？</h2>
+      <p><strong>BMR</strong>（基礎代謝率）：是你身體在完全靜止時維持生命活動所需的最低熱量。</p>
+      <p><strong>TDEE</strong>（總熱量消耗）：是你一天所有活動（走路、吃飯、運動等）所需的總熱量。</p>
+      <p><strong>BMI：</strong> 身體質量指數，是體重與身高的比例指標，用來初步判斷體重是否落在健康範圍。</p>
+      <p>根據這些值，你可以調整每日攝取熱量以達到 <strong>減重</strong>、<strong>維持</strong> 或 <strong>增肌</strong> 的目標。</p>
+    </div>
+
+    <img src="/static/TDEE.png" alt="TDEE 圖片" class="banner">
+
+    <form id="tdee-form">
+      <label>年齡:
+        <input type="number" name="age" required>
+      </label>
+
+      <label>身高 (cm):
+        <input type="number" name="height" step="0.1" required>
+      </label>
+
+      <label>體重 (kg):
+        <input type="number" name="weight" step="0.1" required>
+      </label>
+
+      <label>性別:
+        <select name="gender" required>
+          <option value="male">男</option>
+          <option value="female">女</option>
+        </select>
+      </label>
+
+      <label>活動量:
+        <select name="activity_level" required>
+          <option value="sedentary">幾乎不動</option>
+          <option value="light">輕度(每週運動 1-2 天) </option>
+          <option value="moderate">中等(每週運動 2-4 天) </option>
+          <option value="active">活躍(每週運動 4-6 天) </option>
+          <option value="very_active">非常活躍(每週運動 7 天) </option>
+        </select>
+      </label>
+
+      <label>目標:
+        <select name="goal" required>
+          <option value="cut">減重</option>
+          <option value="maintain">維持</option>
+          <option value="bulk">增肌</option>
+        </select>
+      </label>
+
+      <button type="submit">✅ 計算 TDEE</button>
+    </form>
+
+    <div id="result-container" class="result" style="display:none">
+      <h2>📊 計算結果</h2>
+      <ul>
+        <li><strong>基礎代謝率 BMR：</strong><span id="bmr"></span> kcal</li>
+        <li><strong>總消耗熱量 TDEE：</strong><span id="tdee"></span> kcal</li>
+        <li><strong>建議攝取熱量：</strong><span id="calories"></span> kcal</li>
+      </ul>
+      <p id="message"></p>
+    </div>
+    <div class="bmi-box">
+      <p><strong>BMI：</strong><span id="bmi"></span></p>
+      <p><strong>BMI 建議：</strong><span id="bmi_message"></span></p>
+      <p class="bmi-note">📌 如果你只在乎體重，可以依照 BMI 建議選擇 <strong>減重</strong> 或 <strong>增重</strong>。</p>
+    </div>
+    <div class="next-suggestion">
+      <p>想了解更多幫助達成目標的運動方式嗎？</p>
+      <a href="/exercise" class="btn-secondary">👉 了解運動建議</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("tdee-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      data.age = parseInt(data.age);
+      data.height = parseFloat(data.height);
+      data.weight = parseFloat(data.weight);
+
+      const res = await fetch("/tdee", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+      });
+      const json = await res.json();
+
+      document.getElementById("result-container").style.display = "block";
+      document.getElementById("bmr").textContent = json.bmr;
+      document.getElementById("tdee").textContent = json.tdee;
+      document.getElementById("calories").textContent = json.recommended_calories;
+      document.getElementById("message").textContent = "📣 " + json.message;
+      document.getElementById("bmi").textContent = json.bmi.toFixed(2);
+      document.getElementById("bmi_message").textContent = json.bmi_message;
+    });
+  </script>
+</body>
+</html>

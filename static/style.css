@@ -1,0 +1,241 @@
+/* 全域字型設定 */
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background-color: #fff;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+/* 中央容器 */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* 標題樣式 */
+h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+/* 圖片 banner 美化 + 置中 */
+img.banner {
+  display: block;
+  margin: 0 auto 30px auto;    /* 水平置中 + 下方留白 */
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 表單輸入區塊 */
+form label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* 按鈕樣式 */
+button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1b5e20;
+}
+
+/* 結果區塊 */
+.result {
+  background-color: #f6f6f6;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 40px;
+  border-radius: 8px;
+}
+
+.result ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.result li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.result p {
+  margin-top: 15px;
+  font-style: italic;
+  color: #333;
+}
+
+.intro {
+  background-color: #f9f9f9;
+  border-left: 5px solid #4caf50;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+}
+
+.intro h2 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #2e7d32;
+}
+
+.intro p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.bmi-box {
+  background-color: #f3f3f3;
+  border-left: 6px solid #008080;
+  padding: 1em;
+  margin-top: 1.5em;
+  border-radius: 5px;
+  font-size: 0.95em;
+  color: #333;
+}
+
+.bmi-note {
+  margin-top: 0.8em;
+  font-style: italic;
+  font-size: 0.9em;
+  color: #444;
+}
+
+.next-suggestion {
+  margin-top: 30px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+  text-align: center;
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 8px;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #cfcfcf;
+}
+
+.exercise-section {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.exercise-card {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    padding: 20px 30px;
+    width: 280px;
+    transition: transform 0.3s ease;
+}
+
+.exercise-card:hover {
+    transform: translateY(-5px);
+}
+
+.exercise-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.exercise-card ul {
+    padding-left: 18px;
+    color: #555;
+}
+
+
+body.homepage {
+  background: #ffffff;
+}
+
+/* 第二頁才套背景圖（不加 homepage class 的） */
+body {
+  background-image: url('/static/fitness.png');
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.home-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.9rem 1.8rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #222;
+  background-color: #FFD700; /* 金黃色 */
+  border: none;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.home-btn:hover {
+  background-color: #FFC300; /* 更深的黃 */
+  transform: translateY(-2px);
+}
+
+.sub-box {
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  padding: 20px 30px;
+  width: 300px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  color: #111; /* 比 #333 更深，看起來更清楚 */
+}
+
+/* 提示框樣式 */
+.hover-popup {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1rem;
+  border-radius: 12px;
+  color: #ff7c6b;
+  font-size: 1rem;
+  max-width: 280px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
