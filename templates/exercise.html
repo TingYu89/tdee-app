@@ -223,22 +223,6 @@
   </div>
 
   <script>
-    const tips = document.querySelectorAll('.link-tip');
-    const popup = document.getElementById('popup');
-    const popupText = document.getElementById('popup-text');
-
-    tips.forEach(tip => {
-      tip.addEventListener('click', () => {
-        popupText.innerHTML = tip.dataset.desc.replaceAll("\\n", "<br>");
-        popup.classList.remove('hidden');
-      });
-    });
-
-    function closePopup() {
-      popup.classList.add('hidden');
-    }
-  </script>
-  <script>
     document.querySelectorAll('.link-tip').forEach(el => {
     const popup = document.createElement('div');
     popup.classList.add('hover-popup');
