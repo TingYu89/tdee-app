@@ -81,9 +81,11 @@
     <div class="ask-ai-section">
       <h3>詢問健康建議</h3>
       <input type="text" id="user-question" placeholder="請輸入你的問題..." />
-      <button onclick="askAI()">發問</button>
+      <!-- <button onclick="askAI()">發問</button> -->
+      <button id="ask-ai-btn" onclick="askAI()">發問</button>
       <div id="ai-response"></div>
     </div>
+    
 
     <div class="next-suggestion">
       <p>想了解更多幫助達成目標的運動方式嗎？</p>
@@ -117,25 +119,46 @@
       document.getElementById("bmi").textContent = json.bmi.toFixed(2);
       document.getElementById("bmi_message").textContent = json.bmi_message;
     });
+
     document.addEventListener("DOMContentLoaded", () => {
-      const aiBtn = document.getElementById("ask-ai-btn");
-      const aiInput = document.getElementById("ai-question");
-      const aiResult = document.getElementById("ai-answer");
+      const aiBtn = document.querySelector("button[onclick='askAI()']");
+      const aiInput = document.getElementById("user-question");
+      const aiResult = document.getElementById("ai-response");
 
       aiBtn.addEventListener("click", async () => {
         const question = aiInput.value;
-        aiResult.textContent = "AI 正在思考中... ⏳";
+        aiResult.textContent = " 正在思考中... ⏳";
+
+        // 從頁面抓使用者輸入資料
+        const age = parseInt(document.querySelector("input[name='age']").value);
+        const height = parseFloat(document.querySelector("input[name='height']").value);
+        const weight = parseFloat(document.querySelector("input[name='weight']").value);
+        const gender = document.querySelector("select[name='gender']").value;
+        const goal = document.querySelector("select[name='goal']").value;
+        const tdee = parseFloat(document.getElementById("tdee").textContent);
 
         const res = await fetch("/ask-ai", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ question })
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            age,
+            height,
+            weight,
+            gender,
+            goal,
+            tdee,
+            question
+          })
         });
 
         const data = await res.json();
-        aiResult.textContent = "💬 " + data.answer;
+        console.log(data);
+        aiResult.textContent = "💬 " + (data.ai_response || "AI 沒有回答");
       });
     });
+
   </script>
 </body>
 </html>

@@ -8,12 +8,13 @@ from fastapi.templating import Jinja2Templates
 from fastapi.requests import Request
 import uvicorn
 import os
+import requests
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 
 load_dotenv()
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
+print("🧪 OPENROUTER_API_KEY:", OPENROUTER_API_KEY)
 templates = Jinja2Templates(directory="templates")
 
 app = FastAPI(
@@ -55,28 +56,40 @@ def exercise_page(request: Request):
 
 @app.post("/ask-ai")
 async def ask_ai(data: dict):
-    user_prompt = f"我是一位{data['age']}歲的{data['gender']}，我目前的TDEE是{data['tdee']}，我的目標是{data['goal']}。請給我一天的飲食與運動建議，請具體並簡潔地列出重點。"
+    try:
+        user_prompt = (
+                f"我是{data['age']}歲的{data['gender']}，"
+                f"目前的TDEE是{data['tdee']}，我的目標是{data['goal']}。"
+                f"請根據這些資訊與我問的問題：{data['question']}，給我一段具體建議。"
+            )
 
-    headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "http://localhost:8000",
-        # "HTTP-Referer": "https://yourdomain.onrender.com",
-        "X-Title": "tdee-app"
-    }
+        headers = {
+            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Content-Type": "application/json",
+            "HTTP-Referer": "http://localhost:8000",
+            # "HTTP-Referer": "https://yourdomain.onrender.com",
+            "X-Title": "tdee-app"
+        }
 
-    payload = {
-        "model": "openai/gpt-3.5-turbo",
-        "messages": [
-            {"role": "system", "content": "你是一位營養師與運動教練，請根據使用者提供的TDEE資訊提供具體建議。"},
-            {"role": "user", "content": user_prompt}
-        ]
-    }
+        payload = {
+            "model": "openai/gpt-3.5-turbo",
+            "messages": [
+                {"role": "system", "content": "你是一位營養師與運動教練，請根據使用者提供的TDEE資訊提供具體建議。"},
+                {"role": "user", "content": user_prompt}
+            ]
+        }
+        print("🚀 payload:", payload)
 
-    response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload)
+        response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload)
 
-    if response.status_code == 200:
-        ai_reply = response.json()["choices"][0]["message"]["content"]
-        return JSONResponse(content={"ai_response": ai_reply})
-    else:
-        return JSONResponse(status_code=500, content={"error": "API call failed"})
+        print("✅ Status:", response.status_code)
+        print("📨 Response:", response.text)
+
+        if response.status_code == 200:
+            ai_reply = response.json()["choices"][0]["message"]["content"]
+            return JSONResponse(content={"ai_response": ai_reply})
+        else:
+            return JSONResponse(status_code=500, content={"error": "API call failed"})
+    except Exception as e:
+        print("🔥 Exception in /ask-ai:", str(e))
+        return JSONResponse(status_code=500, content={"error": str(e)})
