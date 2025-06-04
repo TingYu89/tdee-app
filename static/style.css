@@ -241,30 +241,37 @@ body {
 }
 
 .ask-ai-section {
-  border: 200px solid #388e3c;         /* 加粗一點，顏色明顯 */
-  border-radius: 10px;
-  background-color: #f0fdf4;         /* 更淺的綠底 */
-  padding: 20px;
-  margin-top: 100px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border-left: 6px solid #008080;  /* 左邊加深色框線 */
+  background-color: #f3f3f3;        /* 淺灰底 */
+  padding: 1em;
+  margin-top: 1.5em;
+  border-radius: 5px;
+  font-size: 0.95em;
+  color: #333;
 }
+
 
 .ask-ai-section input[type="text"] {
-  width: 400px;
+  width: 80%;          /* 由原本 400px 改成百分比寬度會自適應 */
+  max-width: 600px;     /* 最大寬度限制，避免在超大螢幕過長 */
   padding: 8px;
-  margin: 8px;
+  margin: 8px auto;
   font-size: 16px;
+  display: block;       /* 搭配 margin auto 置中 */
 }
 
-.ask-ai-section button#ask-ai-btn {
-  width: 100%;
-  padding: 20px 40px;
-  background-color: #2e7d32;
+.ask-ai-section button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+
+  /* 加上這兩行讓按鈕不會撐滿 */
+  width: auto;
+  display: block;
+  margin: 20px auto 0;  /* 上方間距 + 置中 */
 }
 
 .ask-ai-section button:hover {
